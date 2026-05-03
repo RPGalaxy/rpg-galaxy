@@ -3,14 +3,14 @@
 ## Atributos
 6 pontos para distribuir + pontos de raça
 
-- Força: 2
-- Corpo a Corpo: 3
+- Força: 1
+- Corpo a Corpo: 1
 - Carisma: 1
-- Inteligência: 2
-- Conhecimento: 1 (+1)
-- Agilidade: 1 (+1)
-- Resistência: 2
-- Persistência: 2
+- Inteligência: 1
+- Conhecimento: 1 
+- Agilidade: 1 
+- Resistência: 1
+- Persistência: 1
 
 ## Status
 Variados de acordo com classe.
