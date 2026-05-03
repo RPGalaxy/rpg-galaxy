@@ -236,45 +236,45 @@
 
 # VIDA DE CADA CLASSE
 
-- Bárbaro: 14 + (2 * var('res'))
-- Guerreiro: 12 + (2 * var('res'))
-- Cavaleiro: 12 + (2 * var('res'))
-- Clérigo: 10 + (2 * var('res'))
-- Naturalista: 10 + (1 * var('res'))
-- Patrulheiro: 10 + (1 * var('res'))
-- Bardo: 8 + (1 * var('res'))
-- Criminoso: 8 + (1 * var('res'))
-- Inventor: 8 + (1 * var('res'))
-- Conjurador: 6 + (1 * var('res'))
+- Bárbaro: 14 + (2 * var('Resistência'))
+- Guerreiro: 12 + (2 * var('Resistência'))
+- Cavaleiro: 12 + (2 * var('Resistência'))
+- Clérigo: 10 + (2 * var('Resistência'))
+- Naturalista: 10 + (1 * var('Resistência'))
+- Patrulheiro: 10 + (1 * var('Resistência'))
+- Bardo: 8 + (1 * var('Resistência'))
+- Criminoso: 8 + (1 * var('Resistência'))
+- Inventor: 8 + (1 * var('Resistência'))
+- Conjurador: 6 + (1 * var('Resistência'))
 
 ---
 
 # RECURSO DE CADA CLASSE
 
-Cada classe possui um recurso específico (Mana, Alma, Fé ou Foco) calculado a partir da fórmula de vida. Veja a explicação completa em **Sistema**.
+Cada classe possui um recurso específico (Mana, Alma, Fé ou Foco) calculado a partir da fórmula de vida, mas usando um **atributo característico da classe** no lugar de Resistência. Veja a explicação completa em **Sistema**.
 
 ## Mana — Mago
 
-- Mago: 60 + (10 * var('res'))
+- Mago: 60 + (10 * var('Inteligência'))
 
 ## Alma — Bruxo e Feiticeiro
 
-- Bruxo: 30 + (5 * var('res'))
-- Feiticeiro: 30 + (5 * var('res'))
+- Bruxo: 30 + (5 * var('Carisma'))
+- Feiticeiro: 30 + (5 * var('Persistência'))
 
 ## Fé — Clérigo
 
-- Paladino: 50 + (10 * var('res'))
-- Devoto: 50 + (10 * var('res'))
-- Sacerdote: 50 + (10 * var('res'))
+- Paladino: 50 + (10 * var('Persistência'))
+- Devoto: 50 + (10 * var('Persistência'))
+- Sacerdote: 50 + (10 * var('Persistência'))
 
 ## Foco — Demais Classes
 
-- Bárbaro: 14 + (2 * var('res'))
-- Guerreiro: 12 + (2 * var('res'))
-- Cavaleiro: 12 + (2 * var('res'))
-- Naturalista: 10 + (1 * var('res'))
-- Patrulheiro: 10 + (1 * var('res'))
-- Bardo: 8 + (1 * var('res'))
-- Criminoso: 8 + (1 * var('res'))
-- Inventor: 8 + (1 * var('res'))
+- Bárbaro: 14 + (2 * var('Resistência'))
+- Guerreiro: 12 + (2 * var('Força'))
+- Cavaleiro: 12 + (2 * var('Corpo a Corpo'))
+- Naturalista: 10 + (1 * var('Conhecimento'))
+- Patrulheiro: 10 + (1 * var('Agilidade'))
+- Bardo: 8 + (1 * var('Carisma'))
+- Criminoso: 8 + (1 * var('Agilidade'))
+- Inventor: 8 + (1 * var('Inteligência'))

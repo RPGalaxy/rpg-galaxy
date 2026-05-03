@@ -55,11 +55,13 @@ Além da vida, cada personagem possui um recurso principal usado para conjurar m
 
 ## Fórmula
 
-O recurso é calculado seguindo o mesmo sistema da vida, multiplicado pelo fator do recurso:
+O recurso é calculado seguindo o mesmo sistema da vida, multiplicado pelo fator do recurso. **Diferente da vida, que usa Resistência, cada classe utiliza um atributo característico** para calcular seu recurso (Inteligência para Mago, Carisma para Bruxo, Persistência para clérigos, etc.).
 
-- **Mana** = Vida × 10
-- **Alma** = Vida × 5
-- **Fé** = Vida × 5
-- **Foco** = Vida × 1
+- **Mana** = base + (10 × atributo da classe)
+- **Alma** = base + (5 × atributo da classe)
+- **Fé** = base + (10 × atributo da classe)
+- **Foco** = base + (multiplicador × atributo da classe)
+
+> Atributo varia: Mago (Inteligência), Bruxo (Carisma), Feiticeiro (Persistência), Clérigos (Persistência), Bárbaro (Resistência), Guerreiro (Força), Cavaleiro (Corpo a Corpo), Bardo (Carisma), Criminoso (Agilidade), Inventor (Inteligência), Naturalista (Conhecimento), Patrulheiro (Agilidade).
 
 Os valores por classe estão detalhados no Compêndio de Classes.
