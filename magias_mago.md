@@ -1,4 +1,4 @@
-# MAGIAS — MAGO (COMPÊNDIO ELEMENTAL EXPANDIDO)
+# MAGIAS — MAGO
 
 Compêndio expandido de magias de Mago, organizado por escola elemental. Cada escola apresenta 5 magias por nível de magia (1 ao 10). Dano escala com **Inteligência** e **Conhecimento**. Custos e efeitos secundários variam conforme subclasse (Elementalista, Arcanista, Mago Negro).
 
