@@ -4,14 +4,14 @@
 
 ## Humano
 
-Raça versátil e adaptável, sem especialização inata. Recebe pontos extras de atributo livres para distribuir, refletindo sua diversidade de origens e profissões.
-+1 ponto adicional de atributo, +5 em testes de uma perícia à escolha do jogador
+Raça versátil e adaptável, sem especialização inata. Sua diversidade de origens e profissões reflete-se em adaptabilidade prática.
++5 em testes de uma perícia à escolha do jogador
 **Perícias iniciais:** 2 perícias à escolha do jogador
 
 ## Elfos
 
 Raça conhecida por sua alta conexão com a floresta. Geralmente altos e esguios, além de àgeis. Separados em 2 tribos com uma rivalidade antiga, os Elfos da Lua e os Elfos do Sol.
-+5 em testes de agilidade e sobrevivência
++5 em testes de Sobrevivência
 
 ### Elfos da Lua
 Coloração acizentada, especializados em técnicas furtivas de assassinato e com hábitos noturnos. Fracos em combates 1x1
@@ -25,13 +25,12 @@ Proeficiencia em armas táticas de longo alcance, +5 em pontaria e +1 d6 em alvo
 
 ### Elfos Elípticos
 Mais bronzeados, raça antiga dos elfos especializada em magia de longo e curto alcance, variando de acordo com seu clã, versáteis para combates em grupo ou 1x1.
-Proeficiência em magia arcana, +5 em testes de inteligência e conhecimento mágico
+Proeficiência em magia arcana, +5 em testes de Conhecimento Arcano
 **Perícias iniciais:** Conhecimento Arcano, Foco Mágico
 
 ## Anão
 
 Seres humanóides que apesar de sua baixa estatura demonstram uma resistência surpreendente. Alto conhecimento em manufatura porém baixa agilidade.
-+5 em resistência, -2 em agilidade
 
 ### Descendentes de Hefesto
 Conhecidos por sua grande versatilidade em criações, os melhores quando se trata de engenharia mágica. Não são combatentes muito ágeis, porém resistentes.
@@ -78,7 +77,6 @@ Descendentes do grande Dragão Tempestuoso, com coloração violácea. Resistent
 ## Goblin
 
 Pequenos seres humanóides de pele esverdeada ou amarronzada, conhecidos por sua astúcia e agilidade. Pouco resistentes mas extremamente ágeis e oportunistas.
-+5 em agilidade, -2 em resistência
 
 ### Tradicional
 Os mais comuns, ágeis e furtivos, costumam atacar em grupo. Vantagem em combate quando estão em maioria numérica.
@@ -86,27 +84,25 @@ Os mais comuns, ágeis e furtivos, costumam atacar em grupo. Vantagem em combate
 
 ### Bugbear
 Goblins maiores e mais musculosos, próximos do tamanho de um humano. Trocam parte de sua agilidade por força bruta.
-+5 em força, perde o bônus de agilidade
 **Perícias iniciais:** Combate Bruto, Intimidação
 
 ### Dunker
 Goblins de coloração mais escura, especializados em emboscadas e armadilhas. Hábeis na construção de mecanismos rudimentares.
-+5 em testes de armadilhas e engenhocas
++5 em testes de Desarmar Armadilhas e Engenharia
 **Perícias iniciais:** Desarmar Armadilhas, Engenharia
 
 ### Hobgoblin
 Goblins de origem militar, mais disciplinados e organizados. Costumam liderar tropas e operam em formações táticas.
-+5 em comando e estratégia, proeficiência em armas marciais
++5 em testes de Liderança e Estratégia, proeficiência em armas marciais
 **Perícias iniciais:** Liderança, Tática de Combate
 
 ## Orc
 
 Humanóides robustos e brutais, conhecidos por sua força física e cultura guerreira. Fortes e resistentes, porém de inteligência mediana.
-+5 em força, -2 em inteligência
 
 ### Orcs Cinzas
 Orcs das montanhas, com pele cinzenta e maior conexão com tradições xamânicas. Mais inteligentes que seus primos verdes, equilibram força bruta com magia primal.
-+3 em conhecimento mágico, sem penalidade em inteligência
++3 em testes de Conhecimento Arcano
 **Perícias iniciais:** Conhecimento Arcano, Sobrevivência
 
 ### Orcs Verdes
@@ -117,13 +113,13 @@ Os orcs tradicionais, brutais e diretos no combate. Vivem em tribos guerreiras e
 ## Tritão
 
 Humanóides aquáticos com características de criaturas marinhas, escamas em parte do corpo e habilidade natural de respirar dentro e fora da água. Vivem em sociedades submersas e raramente se aventuram em terra.
-+5 em natação, respiração aquática, vantagem em combate aquático
++5 em testes de Natação, respiração aquática, vantagem em combate aquático
 **Perícias iniciais:** Natação, Navegação
 
 ## Fadas
 
 Pequenos seres mágicos com fortes ligações aos planos elementais e espirituais. Frágeis fisicamente, mas com grande capacidade mágica inata.
--3 em resistência, +5 em testes de magia
++5 em testes de Foco Mágico
 
 ### Elementais
 Fadas ligadas aos elementos naturais (fogo, água, terra, ar). Cada subespécie possui afinidade com seu elemento de origem.
@@ -135,13 +131,13 @@ Fadas associadas a almas e ao plano espiritual. Capazes de se comunicar com mort
 
 ### Fadas Onírias
 Fadas dos sonhos e ilusões, capazes de manipular percepções e criar miragens. Atuam principalmente à noite e raramente são vistas em sua forma verdadeira.
-+5 em testes de ilusão e enganação
++5 em testes de Enganação e Performance
 **Perícias iniciais:** Enganação, Performance
 
 ## Sátiros/Faunos (buscadores de pã)
 
 Humanóides com pernas e chifres de cabra, ligados à natureza, à música e à festa. Devotos do antigo deus Pã, são encantadores natos e exímios músicos.
-+5 em carisma e música, +3 em testes de natureza
++5 em testes de Performance, +3 em testes de Conhecimento da Natureza
 **Perícias iniciais:** Performance, Conhecimento da Natureza
 
 ### Ninfas
@@ -156,7 +152,7 @@ Descendentes de pactos antigos entre humanos e seres de outros planos. Marcados 
 
 ### Linhagem Infernal
 Descendentes de pactos com seres dos Nove Infernos. Resistentes ao fogo e hábeis em manipulação e barganhas.
-+5 em persuasão, resistência ao fogo
++5 em testes de Persuasão, resistência ao fogo
 **Perícias iniciais:** Persuasão, Enganação
 
 ### Linhagem Abissal
@@ -166,5 +162,5 @@ Descendentes de pactos com seres do Abismo. Mais caóticos e violentos que seus 
 
 ### Linhagem Etérea (Celeste)
 Descendentes de pactos com seres celestiais. Diferente das outras linhagens tiefling, possuem traços luminosos e inclinação ao bem, embora ainda carreguem o estigma do pacto.
-+5 em cura, resistência à luz
++5 em testes de Medicina, resistência à luz
 **Perícias iniciais:** Medicina, Empatia

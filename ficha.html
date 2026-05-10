@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de Personagem</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-main: #1a1410;
+    --bg-panel: #2a221c;
+    --bg-input: #15110d;
+    --border-gold: #8a6d3b;
+    --gold: #c9a55c;
+    --gold-bright: #e8c873;
+    --text-main: #e8dcc4;
+    --text-dim: #a0907a;
+    --accent-red: #8b2e2e;
+    --accent-blue: #2e5a8b;
+    --accent-green: #4a7a3a;
+    --shadow: rgba(0, 0, 0, 0.6);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg-main);
+    background-image:
+      radial-gradient(circle at 20% 30%, rgba(139, 110, 60, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 80% 70%, rgba(139, 46, 46, 0.05) 0%, transparent 50%);
+    color: var(--text-main);
+    font-family: 'EB Garamond', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.4;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Cinzel', serif;
+    color: var(--gold-bright);
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  h1 { font-size: 2.2em; text-align: center; margin-bottom: 0.3em; }
+  h2 {
+    font-size: 1.2em;
+    border-bottom: 1px solid var(--border-gold);
+    padding-bottom: 6px;
+    margin-bottom: 12px;
+    color: var(--gold);
+  }
+  h3 { font-size: 1em; color: var(--gold); margin-bottom: 8px; }
+  h4 { font-size: 0.85em; color: var(--text-dim); text-transform: uppercase; margin-bottom: 4px; }
+
+  /* TOPBAR */
+  .topbar {
+    max-width: 1400px;
+    margin: 0 auto 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .topbar h1 { flex: 1; min-width: 200px; }
+  .actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  button, .btn {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-gold);
+    color: var(--gold);
+    padding: 8px 16px;
+    font-family: 'Cinzel', serif;
+    font-size: 0.85em;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  button:hover, .btn:hover {
+    background: var(--border-gold);
+    color: var(--bg-main);
+  }
+  button.danger { border-color: var(--accent-red); color: #d88; }
+  button.danger:hover { background: var(--accent-red); color: white; }
+
+  /* MAIN GRID */
+  main {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+  }
+
+  .panel {
+    background: var(--bg-panel);
+    border: 1px solid var(--border-gold);
+    padding: 16px;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+
+  .panel.span-3 { grid-column: 1 / -1; }
+  .panel.span-2 { grid-column: span 2; }
+
+  /* INPUTS */
+  input[type="text"], input[type="number"], select, textarea {
+    background: var(--bg-input);
+    border: 1px solid var(--border-gold);
+    color: var(--text-main);
+    padding: 6px 8px;
+    font-family: inherit;
+    font-size: 1em;
+    width: 100%;
+  }
+  input[type="number"] { text-align: center; }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold-bright);
+    box-shadow: 0 0 6px rgba(232, 200, 115, 0.3);
+  }
+  textarea { resize: vertical; min-height: 80px; }
+
+  label {
+    display: block;
+    color: var(--text-dim);
+    font-size: 0.8em;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+    font-family: 'Cinzel', serif;
+  }
+
+  /* IDENTITY GRID */
+  .identity-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .identity-grid .full { grid-column: 1 / -1; }
+  .identity-grid .half { grid-column: span 2; }
+
+  /* ATTRIBUTES */
+  .attributes-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+  .attribute-box {
+    background: var(--bg-input);
+    border: 2px solid var(--border-gold);
+    padding: 10px;
+    text-align: center;
+    position: relative;
+  }
+  .attribute-box .att-name {
+    font-family: 'Cinzel', serif;
+    font-size: 0.75em;
+    text-transform: uppercase;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    margin-bottom: 6px;
+  }
+  .attribute-box input.att-base {
+    background: transparent;
+    border: none;
+    color: var(--gold-bright);
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    padding: 0;
+    width: 100%;
+    font-family: 'Cinzel', serif;
+  }
+  .attribute-box input.att-base:focus {
+    box-shadow: none;
+    background: rgba(0,0,0,0.3);
+  }
+  .attribute-box .att-effective {
+    font-size: 0.75em;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+  .attribute-box .att-effective span { color: var(--gold-bright); font-weight: bold; }
+
+  /* STATUS BARS */
+  .status-row {
+    display: grid;
+    grid-template-columns: 80px 1fr 100px;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .status-row label { margin: 0; }
+  .status-bar {
+    background: var(--bg-input);
+    border: 1px solid var(--border-gold);
+    height: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .status-bar-fill {
+    height: 100%;
+    transition: width 0.3s;
+  }
+  .status-bar-fill.vida { background: linear-gradient(90deg, #8b2e2e, #c44); }
+  .status-bar-fill.recurso { background: linear-gradient(90deg, #2e5a8b, #4a8bc4); }
+  .status-bar-fill.sanidade { background: linear-gradient(90deg, #6a4a8b, #9a7ac4); }
+  .status-bar-fill.fome { background: linear-gradient(90deg, #8b6e2e, #c4a44a); }
+  .status-bar-text {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.85em;
+    color: var(--text-main);
+    text-shadow: 0 1px 3px black;
+    font-weight: bold;
+  }
+  .status-inputs {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85em;
+  }
+  .status-inputs input {
+    width: 45px;
+    padding: 4px;
+  }
+  .formula-hint {
+    font-size: 0.75em;
+    color: var(--text-dim);
+    margin-top: 2px;
+    font-style: italic;
+  }
+  .formula-hint button {
+    padding: 2px 6px;
+    font-size: 0.85em;
+    margin-left: 4px;
+  }
+
+  /* SKILLS */
+  .skills-section {
+    margin-bottom: 16px;
+  }
+  .skills-section h3 {
+    background: rgba(139, 110, 60, 0.15);
+    padding: 4px 8px;
+    margin-bottom: 6px;
+    font-size: 0.9em;
+    border-left: 3px solid var(--gold);
+  }
+  .skill-row {
+    display: grid;
+    grid-template-columns: 24px 1fr auto auto;
+    align-items: center;
+    gap: 6px;
+    padding: 3px 4px;
+    font-size: 0.9em;
+    border-bottom: 1px dotted rgba(139, 110, 60, 0.2);
+  }
+  .skill-row:hover {
+    background: rgba(139, 110, 60, 0.08);
+  }
+  .skill-row input[type="checkbox"] {
+    cursor: pointer;
+    width: 16px;
+    height: 16px;
+    accent-color: var(--gold);
+  }
+  .skill-row .skill-name { font-size: 0.95em; }
+  .skill-row .skill-bonus-input {
+    width: 36px;
+    padding: 2px;
+    font-size: 0.85em;
+  }
+  .skill-row .skill-total {
+    width: 40px;
+    text-align: center;
+    font-family: 'Cinzel', serif;
+    color: var(--gold-bright);
+    font-weight: bold;
+  }
+  .skill-row.trained .skill-name { color: var(--gold-bright); font-weight: 600; }
+
+  /* SPELLS */
+  .spell-school-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+  .spell-school-tag {
+    background: var(--bg-input);
+    border: 1px solid var(--border-gold);
+    padding: 4px 10px;
+    font-size: 0.85em;
+    cursor: pointer;
+    color: var(--text-dim);
+  }
+  .spell-school-tag.active {
+    background: var(--border-gold);
+    color: var(--bg-main);
+    font-weight: bold;
+  }
+  .spell-list-area {
+    background: var(--bg-input);
+    border: 1px solid var(--border-gold);
+    padding: 12px;
+    min-height: 120px;
+  }
+
+  /* EQUIPMENT */
+  .equip-slots {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+  .equip-slot label { font-size: 0.75em; }
+  #inventory-list { min-height: 100px; }
+
+  /* NOTES */
+  #notes-area { min-height: 150px; }
+
+  /* HIDDEN */
+  .hidden { display: none !important; }
+
+  /* RESPONSIVE */
+  @media (max-width: 1100px) {
+    main { grid-template-columns: 1fr 1fr; }
+    .panel.span-3 { grid-column: 1 / -1; }
+  }
+  @media (max-width: 700px) {
+    main { grid-template-columns: 1fr; }
+    .panel.span-2, .panel.span-3 { grid-column: 1 / -1; }
+    .attributes-grid { grid-template-columns: repeat(2, 1fr); }
+    .identity-grid { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>⚔️ Ficha de Personagem</h1>
+  <div class="actions">
+    <button class="danger" onclick="clearSheet()">🗑 Limpar</button>
+  </div>
+</div>
+
+<main>
+
+  <!-- IDENTIDADE -->
+  <section class="panel span-3">
+    <h2>Identidade</h2>
+    <div class="identity-grid">
+      <div class="half">
+        <label for="char-name">Nome do Personagem</label>
+        <input type="text" id="char-name" placeholder="Aragorn, Filho de Arathorn">
+      </div>
+      <div class="half">
+        <label for="player-name">Jogador</label>
+        <input type="text" id="player-name">
+      </div>
+
+      <div>
+        <label for="race">Raça</label>
+        <select id="race" onchange="onRaceChange()">
+          <option value="">—</option>
+        </select>
+      </div>
+      <div>
+        <label for="subrace">Subraça / Linhagem</label>
+        <select id="subrace">
+          <option value="">—</option>
+        </select>
+      </div>
+      <div>
+        <label for="class">Classe</label>
+        <select id="class" onchange="onClassChange()">
+          <option value="">—</option>
+        </select>
+      </div>
+      <div>
+        <label for="subclass">Subclasse</label>
+        <select id="subclass" onchange="onSubclassChange()">
+          <option value="">—</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="path">Caminho / Especialização</label>
+        <select id="path">
+          <option value="">—</option>
+        </select>
+      </div>
+      <div>
+        <label for="level">Nível (1-10)</label>
+        <input type="number" id="level" min="1" max="10" value="1" oninput="recalcAll()">
+      </div>
+      <div>
+        <label for="ascension">Ascensão (0-9)</label>
+        <input type="number" id="ascension" min="0" max="9" value="0" oninput="recalcAll()">
+      </div>
+      <div>
+        <label>Multiplicador</label>
+        <input type="text" id="ascension-mult" readonly value="×1.00">
+      </div>
+    </div>
+  </section>
+
+  <!-- ATRIBUTOS -->
+  <section class="panel">
+    <h2>Atributos</h2>
+    <div class="attributes-grid" id="attributes-grid"></div>
+    <p class="formula-hint" style="margin-top: 10px;">
+      Valor efetivo = base × 1.2<sup>ascensão</sup> (arredondado para baixo).
+      Distribua 6 pontos + bônus de raça.
+    </p>
+  </section>
+
+  <!-- STATUS -->
+  <section class="panel">
+    <h2>Status</h2>
+
+    <div class="status-row">
+      <label>Vida</label>
+      <div class="status-bar">
+        <div class="status-bar-fill vida" id="vida-fill"></div>
+        <div class="status-bar-text" id="vida-text">0 / 0</div>
+      </div>
+      <div class="status-inputs">
+        <input type="number" id="vida-atual" value="0" oninput="updateBars()">
+        <span>/</span>
+        <input type="number" id="vida-max" value="0" oninput="updateBars()">
+      </div>
+    </div>
+    <p class="formula-hint" id="vida-formula">
+      Selecione uma classe.
+      <button onclick="applyVidaFormula()">Aplicar fórmula</button>
+    </p>
+
+    <div class="status-row" style="margin-top: 12px;">
+      <label id="recurso-label">Recurso</label>
+      <div class="status-bar">
+        <div class="status-bar-fill recurso" id="recurso-fill"></div>
+        <div class="status-bar-text" id="recurso-text">0 / 0</div>
+      </div>
+      <div class="status-inputs">
+        <input type="number" id="recurso-atual" value="0" oninput="updateBars()">
+        <span>/</span>
+        <input type="number" id="recurso-max" value="0" oninput="updateBars()">
+      </div>
+    </div>
+    <p class="formula-hint" id="recurso-formula">
+      Selecione uma classe.
+      <button onclick="applyRecursoFormula()">Aplicar fórmula</button>
+    </p>
+
+    <div class="status-row" style="margin-top: 12px;">
+      <label>Sanidade</label>
+      <div class="status-bar">
+        <div class="status-bar-fill sanidade" id="san-fill"></div>
+        <div class="status-bar-text" id="san-text">100 / 100</div>
+      </div>
+      <div class="status-inputs">
+        <input type="number" id="san-atual" value="100" oninput="updateBars()">
+        <span>/</span>
+        <input type="number" id="san-max" value="100" oninput="updateBars()">
+      </div>
+    </div>
+
+    <div class="status-row">
+      <label>Fome</label>
+      <div class="status-bar">
+        <div class="status-bar-fill fome" id="fome-fill"></div>
+        <div class="status-bar-text" id="fome-text">100 / 100</div>
+      </div>
+      <div class="status-inputs">
+        <input type="number" id="fome-atual" value="100" oninput="updateBars()">
+        <span>/</span>
+        <input type="number" id="fome-max" value="100" oninput="updateBars()">
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPAMENTO -->
+  <section class="panel">
+    <h2>Equipamento</h2>
+    <div class="equip-slots">
+      <div class="equip-slot">
+        <label>Arma Principal</label>
+        <input type="text" id="equip-mainhand" placeholder="Espada longa, +1d6 cortante">
+      </div>
+      <div class="equip-slot">
+        <label>Arma Secundária</label>
+        <input type="text" id="equip-offhand" placeholder="Escudo, +5 def">
+      </div>
+      <div class="equip-slot">
+        <label>Armadura</label>
+        <input type="text" id="equip-armor" placeholder="Armadura de couro">
+      </div>
+      <div class="equip-slot">
+        <label>Acessório</label>
+        <input type="text" id="equip-accessory" placeholder="Anel mágico">
+      </div>
+    </div>
+    <h3 style="margin-top: 12px;">Inventário</h3>
+    <textarea id="inventory-list" placeholder="Itens carregados, dinheiro, poções..."></textarea>
+  </section>
+
+  <!-- PERÍCIAS -->
+  <section class="panel span-2">
+    <h2>Perícias</h2>
+    <div id="skills-container"></div>
+    <p class="formula-hint">
+      Total = atributo efetivo + bônus extra (se treinada).
+      Marcar perícias treinadas pela raça/classe ou adquiridas com pontos.
+    </p>
+  </section>
+
+  <!-- MAGIAS -->
+  <section class="panel" id="spells-panel">
+    <h2>Magias</h2>
+    <div id="spells-content">
+      <p class="formula-hint">Selecione uma classe conjuradora (Mago, Feiticeiro ou Bruxo) para ver as escolas disponíveis.</p>
+    </div>
+  </section>
+
+  <!-- HISTÓRIA E NOTAS -->
+  <section class="panel span-3">
+    <h2>História e Notas</h2>
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div>
+        <label for="background">Background / Origem</label>
+        <textarea id="background" placeholder="Onde nasceu, como aprendeu sua arte, marcas físicas notáveis, traços de personalidade..."></textarea>
+      </div>
+      <div>
+        <label for="notes-area">Notas Livres</label>
+        <textarea id="notes-area" placeholder="Anotações da sessão, NPCs importantes, missões em andamento, segredos do personagem..."></textarea>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+// =====================================================
+// DADOS DO SISTEMA
+// =====================================================
+
+const ATRIBUTOS = [
+  'Força', 'Corpo a Corpo', 'Carisma', 'Inteligência',
+  'Conhecimento', 'Agilidade', 'Resistência', 'Persistência'
+];
+
+const RACAS = {
+  'Humano': {
+    subracas: ['Padrão'],
+    descricao: 'Versátil, +5 em uma perícia à escolha'
+  },
+  'Elfo': {
+    subracas: ['Elfo da Lua', 'Elfo do Sol', 'Elfo Elíptico'],
+    descricao: '+5 em Sobrevivência'
+  },
+  'Anão': {
+    subracas: ['Descendente de Hefesto', 'Descendente de Volcano', 'Descendente de Goibhniu'],
+    descricao: 'Resistente, hábil em manufatura'
+  },
+  'Draconato': {
+    subracas: ['Linhagem Negra', 'Linhagem Carmesim', 'Linhagem Esmeralda', 'Linhagem Celeste', 'Linhagem Nevada', 'Linhagem Ametista'],
+    descricao: 'Híbrido físico-mágico'
+  },
+  'Goblin': {
+    subracas: ['Tradicional', 'Bugbear', 'Dunker', 'Hobgoblin'],
+    descricao: 'Astuto e ágil'
+  },
+  'Orc': {
+    subracas: ['Orc Cinza', 'Orc Verde'],
+    descricao: 'Robusto e brutal'
+  },
+  'Tritão': {
+    subracas: ['Padrão'],
+    descricao: 'Aquático, respira na água'
+  },
+  'Fada': {
+    subracas: ['Elemental', 'Espiritual', 'Onírica'],
+    descricao: '+5 em Foco Mágico'
+  },
+  'Sátiro/Fauno': {
+    subracas: ['Padrão', 'Náiade', 'Dríade'],
+    descricao: '+5 em Performance, +3 em Conhecimento da Natureza'
+  },
+  'Tiefling': {
+    subracas: ['Linhagem Infernal', 'Linhagem Abissal', 'Linhagem Etérea'],
+    descricao: 'Pacto ancestral extraplanar'
+  }
+};
+
+// Estrutura: classe -> { recurso, vida (fórmula textual), recursoFn (textual), subclasses: { nome: caminhos[] } }
+const CLASSES = {
+  'Conjurador': {
+    recurso: 'Varia',
+    vidaBase: 6, vidaMult: 1, vidaAttr: 'Resistência',
+    subclasses: {
+      'Mago': {
+        recurso: 'Mana', recursoBase: 60, recursoMult: 10, recursoAttr: 'Inteligência',
+        caminhos: ['Elementalista', 'Arcanista', 'Mago Negro']
+      },
+      'Feiticeiro': {
+        recurso: 'Alma', recursoBase: 30, recursoMult: 5, recursoAttr: 'Persistência',
+        caminhos: ['Invocador', 'Necromante', 'Espiritualista']
+      },
+      'Bruxo': {
+        recurso: 'Alma', recursoBase: 30, recursoMult: 5, recursoAttr: 'Carisma',
+        caminhos: ['Patrono', 'Ritualístico', 'Cultista']
+      }
+    }
+  },
+  'Bárbaro': {
+    recurso: 'Foco',
+    vidaBase: 14, vidaMult: 2, vidaAttr: 'Resistência',
+    recursoBase: 14, recursoMult: 2, recursoAttr: 'Resistência',
+    subclasses: {
+      'Tanque': { caminhos: ['Tanque de Defesa', 'Tanque de Assalto', 'Tanque Híbrido'] },
+      'Berserker': { caminhos: ['Sangue', 'Desgaste', 'Adrenalina'] },
+      'Selvagem': { caminhos: ['Pele de Urso', 'Pele de Lobo', 'Pele de Pantera'] }
+    }
+  },
+  'Bardo': {
+    recurso: 'Foco',
+    vidaBase: 8, vidaMult: 1, vidaAttr: 'Resistência',
+    recursoBase: 8, recursoMult: 1, recursoAttr: 'Carisma',
+    subclasses: {
+      'Músico de Cordas': { caminhos: ['Dedilhada', 'Percutida', 'Friccionadas'] },
+      'Músico de Percussão': { caminhos: ['Percussão Direta', 'Raspagem', 'Agitação'] },
+      'Músico de Banda': { caminhos: ['Maestro de Orquestra', 'Coreógrafo', 'Vocalista'] }
+    }
+  },
+  'Cavaleiro': {
+    recurso: 'Foco',
+    vidaBase: 12, vidaMult: 2, vidaAttr: 'Resistência',
+    recursoBase: 12, recursoMult: 2, recursoAttr: 'Corpo a Corpo',
+    subclasses: {
+      'Guarda Real': { caminhos: ['General', 'Instrutor', 'Unidade de Elite'] },
+      'Cavaleiro de Região': { caminhos: ['Espada do Norte', 'Espada do Leste', 'Espada do Oeste'] },
+      'Cavaleiro sem Base': { caminhos: ['Mestre de Armas', 'Esgrima Mista', 'Empunhadura Dupla'] }
+    }
+  },
+  'Clérigo': {
+    recurso: 'Fé',
+    vidaBase: 10, vidaMult: 2, vidaAttr: 'Resistência',
+    recursoBase: 50, recursoMult: 10, recursoAttr: 'Persistência',
+    subclasses: {
+      'Paladino': { caminhos: ['Escudeiro', 'Combatente', 'Utilitário'] },
+      'Devoto': { caminhos: ['Devoto Caótico', 'Devoto Leal', 'Devoto Arrependido'] },
+      'Sacerdote': { caminhos: ['Curandeiro', 'Buffer', 'Protetor'] }
+    }
+  },
+  'Criminoso': {
+    recurso: 'Foco',
+    vidaBase: 8, vidaMult: 1, vidaAttr: 'Resistência',
+    recursoBase: 8, recursoMult: 1, recursoAttr: 'Agilidade',
+    subclasses: {
+      'Ladino': { caminhos: ['Assassino', 'Longo Alcance', 'Furtivo'] },
+      'Ladrão': { caminhos: ['Malandro', 'Ágil', 'Sorrateiro'] },
+      'Bandido': { caminhos: ['Negócios', 'Mercenário', 'Quadrilha'] }
+    }
+  },
+  'Guerreiro': {
+    recurso: 'Foco',
+    vidaBase: 12, vidaMult: 2, vidaAttr: 'Resistência',
+    recursoBase: 12, recursoMult: 2, recursoAttr: 'Força',
+    subclasses: {
+      'Perfurante': { caminhos: ['Lanceiro', 'Rapieira', 'Espada de Estocada Pesada'] },
+      'Cortante': { caminhos: ['Ceifeiro', 'Espadachim', 'Lenhador'] },
+      'Impacto': { caminhos: ['Desarmado', 'Marreta', 'Porrete'] }
+    }
+  },
+  'Inventor': {
+    recurso: 'Foco',
+    vidaBase: 8, vidaMult: 1, vidaAttr: 'Resistência',
+    recursoBase: 8, recursoMult: 1, recursoAttr: 'Inteligência',
+    subclasses: {
+      'Alquimista': { caminhos: ['Alquimista de Cura', 'Alquimista de Mana', 'Alquimista de Dano'] },
+      'Engenheiro': { caminhos: ['Mecânico', 'Mágico', 'Construtor'] },
+      'Artesão': { caminhos: ['Escultor', 'Ferreiro', 'Carpinteiro'] }
+    }
+  },
+  'Naturalista': {
+    recurso: 'Foco',
+    vidaBase: 10, vidaMult: 1, vidaAttr: 'Resistência',
+    recursoBase: 10, recursoMult: 1, recursoAttr: 'Conhecimento',
+    subclasses: {
+      'Druída': { caminhos: ['Monstruoso', 'Arbório', 'Terradi'] },
+      'Herbalista': { caminhos: ['Venenoso', 'Chef', 'Plantas Carnívoras'] },
+      'Amigo dos Animais': { caminhos: ['Domésticos', 'Selvagens', 'Hostis'] }
+    }
+  },
+  'Patrulheiro': {
+    recurso: 'Foco',
+    vidaBase: 10, vidaMult: 1, vidaAttr: 'Resistência',
+    recursoBase: 10, recursoMult: 1, recursoAttr: 'Agilidade',
+    subclasses: {
+      'Escoteiro': { caminhos: ['Especialista em Terrenos', 'Especialista em Especiárias', 'Especialista em Sobrevivência'] },
+      'Caçador': { caminhos: ['Fuzileiro', 'Arqueiro', 'Corpo a Corpo'] },
+      'Reino': { caminhos: ['Conhecedor dos Reinos', 'Geografia Familiar', 'Conhecido dos Reis'] }
+    }
+  }
+};
+
+const PERICIAS = {
+  'Força': ['Atletismo', 'Levantamento', 'Quebrar', 'Arremesso', 'Combate Bruto'],
+  'Corpo a Corpo': ['Espadas', 'Armas de Estocada', 'Armas Brutas', 'Empunhadura Dupla', 'Aparar', 'Contra-Ataque', 'Combate Defensivo'],
+  'Carisma': ['Persuasão', 'Intimidação', 'Enganação', 'Sedução', 'Liderança', 'Performance', 'Etiqueta', 'Barganha'],
+  'Inteligência': ['Investigação', 'Estratégia', 'Decifrar Códigos', 'Tática de Combate', 'Aprendizado Rápido', 'Cálculo'],
+  'Conhecimento': ['Conhecimento Arcano', 'Conhecimento da Natureza', 'Conhecimento Religioso', 'História', 'Geografia', 'Linguagens', 'Medicina', 'Alquimia', 'Herbalismo', 'Engenharia', 'Conhecimento Monstruoso', 'Heráldica'],
+  'Agilidade': ['Acrobacia', 'Furtividade', 'Esquiva', 'Reflexos', 'Pontaria', 'Mãos Leves', 'Equilíbrio', 'Escalada', 'Cavalgar'],
+  'Resistência': ['Vigor', 'Resistência a Veneno', 'Resistência a Doenças', 'Resistência Climática', 'Aguentar Dor', 'Natação', 'Sobrevivência', 'Rastreamento'],
+  'Persistência': ['Vontade', 'Concentração', 'Foco Mágico', 'Resistência Mental', 'Determinação', 'Meditação', 'Devoção'],
+  'Mistas': ['Trato com Animais', 'Abrir Fechaduras', 'Desarmar Armadilhas', 'Forja', 'Culinária', 'Navegação', 'Ofício Manual', 'Empatia', 'Percepção']
+};
+
+// Mapeia perícias mistas a atributo principal (média) - usar primeiro citado no pericias.md
+const PERICIA_ATRIBUTO_PRINCIPAL = {
+  'Trato com Animais': 'Carisma',
+  'Abrir Fechaduras': 'Agilidade',
+  'Desarmar Armadilhas': 'Agilidade',
+  'Forja': 'Força',
+  'Culinária': 'Conhecimento',
+  'Navegação': 'Conhecimento',
+  'Ofício Manual': 'Conhecimento',
+  'Empatia': 'Carisma',
+  'Percepção': 'Inteligência'
+};
+
+const ESCOLAS_MAGO = ['Fogo', 'Terra', 'Água', 'Ar', 'Luz', 'Escuridão', 'Gelo', 'Raio', 'Fé', 'Ilusão & Suporte'];
+const DESCENDENCIAS_FEITICEIRO = ['Dracônica', 'Demoníaca', 'Celestial', 'Feérica', 'Aberrante', 'Estelar', 'Sepulcral', 'Titânica', 'Caótica'];
+const PACTOS_BRUXO = [
+  'O Senhor do Abismo', 'A Sussurrante nas Trevas', 'O Coração das Estrelas',
+  'A Rainha Espinhosa', 'O Forjador Caído', 'O Velho do Mar',
+  'A Mãe Carniçal', 'O Olho Sem Pálpebra', 'O Coletor de Almas', 'O Estranho Sorridente'
+];
+
+// =====================================================
+// ESTADO E POPULATE INICIAL
+// =====================================================
+
+function populateRaces() {
+  const sel = document.getElementById('race');
+  Object.keys(RACAS).forEach(r => {
+    const opt = document.createElement('option');
+    opt.value = r; opt.textContent = r;
+    sel.appendChild(opt);
+  });
+}
+
+function onRaceChange() {
+  const race = document.getElementById('race').value;
+  const sub = document.getElementById('subrace');
+  sub.innerHTML = '<option value="">—</option>';
+  if (race && RACAS[race]) {
+    RACAS[race].subracas.forEach(s => {
+      const o = document.createElement('option');
+      o.value = s; o.textContent = s;
+      sub.appendChild(o);
+    });
+  }
+}
+
+function populateClasses() {
+  const sel = document.getElementById('class');
+  Object.keys(CLASSES).forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c; opt.textContent = c;
+    sel.appendChild(opt);
+  });
+}
+
+function onClassChange() {
+  const cls = document.getElementById('class').value;
+  const sub = document.getElementById('subclass');
+  sub.innerHTML = '<option value="">—</option>';
+  document.getElementById('path').innerHTML = '<option value="">—</option>';
+  if (cls && CLASSES[cls]) {
+    Object.keys(CLASSES[cls].subclasses).forEach(s => {
+      const o = document.createElement('option');
+      o.value = s; o.textContent = s;
+      sub.appendChild(o);
+    });
+  }
+  updateFormulasHints();
+  buildSpellsPanel();
+}
+
+function onSubclassChange() {
+  const cls = document.getElementById('class').value;
+  const subcls = document.getElementById('subclass').value;
+  const path = document.getElementById('path');
+  path.innerHTML = '<option value="">—</option>';
+  if (cls && subcls && CLASSES[cls] && CLASSES[cls].subclasses[subcls]) {
+    CLASSES[cls].subclasses[subcls].caminhos.forEach(c => {
+      const o = document.createElement('option');
+      o.value = c; o.textContent = c;
+      path.appendChild(o);
+    });
+  }
+  updateFormulasHints();
+  buildSpellsPanel();
+}
+
+function getActiveClassData() {
+  const cls = document.getElementById('class').value;
+  const subcls = document.getElementById('subclass').value;
+  if (!cls || !CLASSES[cls]) return null;
+  const data = { ...CLASSES[cls] };
+  if (subcls && CLASSES[cls].subclasses[subcls]) {
+    Object.assign(data, CLASSES[cls].subclasses[subcls]);
+  }
+  return data;
+}
+
+function buildAttributes() {
+  const grid = document.getElementById('attributes-grid');
+  grid.innerHTML = '';
+  ATRIBUTOS.forEach(att => {
+    const id = 'att-' + att.replace(/\s+/g, '-').replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óô]/g, 'o').replace(/[ú]/g, 'u').toLowerCase();
+    const box = document.createElement('div');
+    box.className = 'attribute-box';
+    box.innerHTML = `
+      <div class="att-name">${att}</div>
+      <input type="number" class="att-base" id="${id}" data-attr="${att}" value="1" oninput="recalcAll()">
+      <div class="att-effective">Efetivo: <span id="${id}-eff">1</span></div>
+    `;
+    grid.appendChild(box);
+  });
+}
+
+function buildSkills() {
+  const container = document.getElementById('skills-container');
+  container.innerHTML = '';
+  Object.keys(PERICIAS).forEach(att => {
+    const section = document.createElement('div');
+    section.className = 'skills-section';
+    let html = `<h3>${att}</h3>`;
+    PERICIAS[att].forEach(skill => {
+      const id = 'skill-' + skill.replace(/\s+/g, '-').replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óô]/g, 'o').replace(/[ú]/g, 'u').toLowerCase();
+      const attrPrincipal = att === 'Mistas' ? (PERICIA_ATRIBUTO_PRINCIPAL[skill] || 'Inteligência') : att;
+      html += `
+        <div class="skill-row" id="${id}-row" data-skill="${skill}" data-attr="${attrPrincipal}">
+          <input type="checkbox" id="${id}-trained" onchange="onSkillTrainedChange(this)">
+          <span class="skill-name">${skill}${att === 'Mistas' ? ' <small style="color:var(--text-dim)">('+attrPrincipal+')</small>' : ''}</span>
+          <input type="number" class="skill-bonus-input" id="${id}-bonus" value="0" placeholder="0" oninput="recalcAll()">
+          <span class="skill-total" id="${id}-total">1</span>
+        </div>
+      `;
+    });
+    section.innerHTML = html;
+    container.appendChild(section);
+  });
+}
+
+function onSkillTrainedChange(checkbox) {
+  const row = checkbox.closest('.skill-row');
+  if (checkbox.checked) row.classList.add('trained');
+  else row.classList.remove('trained');
+  recalcAll();
+}
+
+// =====================================================
+// CÁLCULOS
+// =====================================================
+
+function ascensionMultiplier() {
+  const asc = parseInt(document.getElementById('ascension').value) || 0;
+  return Math.pow(1.2, asc);
+}
+
+function attrBase(att) {
+  const id = 'att-' + att.replace(/\s+/g, '-').replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óô]/g, 'o').replace(/[ú]/g, 'u').toLowerCase();
+  const el = document.getElementById(id);
+  return el ? parseInt(el.value) || 0 : 0;
+}
+
+function attrEffective(att) {
+  return Math.floor(attrBase(att) * ascensionMultiplier());
+}
+
+function recalcAll() {
+  const asc = parseInt(document.getElementById('ascension').value) || 0;
+  const mult = Math.pow(1.2, asc);
+  document.getElementById('ascension-mult').value = '×' + mult.toFixed(2);
+
+  // Atributos efetivos
+  ATRIBUTOS.forEach(att => {
+    const id = 'att-' + att.replace(/\s+/g, '-').replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óô]/g, 'o').replace(/[ú]/g, 'u').toLowerCase();
+    const eff = attrEffective(att);
+    const span = document.getElementById(id + '-eff');
+    if (span) span.textContent = eff;
+  });
+
+  // Perícias
+  document.querySelectorAll('.skill-row').forEach(row => {
+    const skill = row.dataset.skill;
+    const attr = row.dataset.attr;
+    const id = 'skill-' + skill.replace(/\s+/g, '-').replace(/[áàâã]/g, 'a').replace(/[éê]/g, 'e').replace(/[í]/g, 'i').replace(/[óô]/g, 'o').replace(/[ú]/g, 'u').toLowerCase();
+    const trained = document.getElementById(id + '-trained').checked;
+    const bonus = parseInt(document.getElementById(id + '-bonus').value) || 0;
+    const total = attrEffective(attr) + (trained ? bonus : 0);
+    document.getElementById(id + '-total').textContent = total;
+  });
+
+  updateFormulasHints();
+  updateBars();
+}
+
+function updateFormulasHints() {
+  const data = getActiveClassData();
+  const vidaHint = document.getElementById('vida-formula');
+  const recursoHint = document.getElementById('recurso-formula');
+  const recursoLabel = document.getElementById('recurso-label');
+
+  if (!data) {
+    vidaHint.innerHTML = 'Selecione uma classe. <button onclick="applyVidaFormula()">Aplicar fórmula</button>';
+    recursoHint.innerHTML = 'Selecione uma classe. <button onclick="applyRecursoFormula()">Aplicar fórmula</button>';
+    recursoLabel.textContent = 'Recurso';
+    return;
+  }
+
+  const vidaCalc = data.vidaBase + data.vidaMult * attrEffective(data.vidaAttr);
+  vidaHint.innerHTML = `Fórmula: ${data.vidaBase} + ${data.vidaMult} × ${data.vidaAttr} = <b>${vidaCalc}</b>
+    <button onclick="applyVidaFormula()">Aplicar</button>`;
+
+  if (data.recurso && data.recursoBase) {
+    const recCalc = data.recursoBase + data.recursoMult * attrEffective(data.recursoAttr);
+    recursoLabel.textContent = data.recurso;
+    recursoHint.innerHTML = `Fórmula (${data.recurso}): ${data.recursoBase} + ${data.recursoMult} × ${data.recursoAttr} = <b>${recCalc}</b>
+      <button onclick="applyRecursoFormula()">Aplicar</button>`;
+  } else {
+    recursoLabel.textContent = data.recurso || 'Recurso';
+    recursoHint.innerHTML = 'Recurso varia conforme subclasse. <button onclick="applyRecursoFormula()">Aplicar</button>';
+  }
+}
+
+function applyVidaFormula() {
+  const data = getActiveClassData();
+  if (!data) return;
+  const vidaCalc = data.vidaBase + data.vidaMult * attrEffective(data.vidaAttr);
+  document.getElementById('vida-max').value = vidaCalc;
+  document.getElementById('vida-atual').value = vidaCalc;
+  updateBars();
+}
+
+function applyRecursoFormula() {
+  const data = getActiveClassData();
+  if (!data || !data.recursoBase) return;
+  const recCalc = data.recursoBase + data.recursoMult * attrEffective(data.recursoAttr);
+  document.getElementById('recurso-max').value = recCalc;
+  document.getElementById('recurso-atual').value = recCalc;
+  updateBars();
+}
+
+function updateBars() {
+  ['vida', 'recurso', 'san', 'fome'].forEach(s => {
+    const atual = parseInt(document.getElementById(s + '-atual').value) || 0;
+    const max = parseInt(document.getElementById(s + '-max').value) || 1;
+    const pct = max > 0 ? Math.max(0, Math.min(100, (atual / max) * 100)) : 0;
+    document.getElementById(s + '-fill').style.width = pct + '%';
+    document.getElementById(s + '-text').textContent = atual + ' / ' + max;
+  });
+}
+
+// =====================================================
+// MAGIAS
+// =====================================================
+
+function buildSpellsPanel() {
+  const subcls = document.getElementById('subclass').value;
+  const content = document.getElementById('spells-content');
+
+  let escolas = null;
+  let titulo = '';
+  if (subcls === 'Mago') { escolas = ESCOLAS_MAGO; titulo = 'Escolas Elementais'; }
+  else if (subcls === 'Feiticeiro') { escolas = DESCENDENCIAS_FEITICEIRO; titulo = 'Descendências'; }
+  else if (subcls === 'Bruxo') { escolas = PACTOS_BRUXO; titulo = 'Pactos'; }
+
+  if (!escolas) {
+    content.innerHTML = '<p class="formula-hint">Selecione uma classe conjuradora (Mago, Feiticeiro ou Bruxo) para ver as escolas disponíveis.</p>';
+    return;
+  }
+
+  let html = `<h3>${titulo}</h3><div class="spell-school-list" id="spell-schools">`;
+  escolas.forEach((e, i) => {
+    html += `<div class="spell-school-tag" onclick="selectSchool('${e.replace(/'/g, "\\'")}', this)">${e}</div>`;
+  });
+  html += `</div>
+    <div>
+      <label for="spell-school-input">Escola/Descendência/Pacto Principal</label>
+      <input type="text" id="spell-school-input" placeholder="Selecione acima ou digite">
+    </div>
+    <h3 style="margin-top: 12px;">Magias Conhecidas</h3>
+    <div class="spell-list-area">
+      <textarea id="spells-known" style="min-height:200px;" placeholder="Liste suas magias conhecidas, uma por linha. Exemplo:
+Nv 1 — Mãos Flamejantes (cone 3m, 2d6 fogo)
+Nv 2 — Bola de Fogo Menor
+Nv 3 — Voo
+..."></textarea>
+    </div>`;
+  content.innerHTML = html;
+}
+
+function selectSchool(name, el) {
+  document.querySelectorAll('.spell-school-tag').forEach(t => t.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('spell-school-input').value = name;
+}
+
+// =====================================================
+// LIMPAR FICHA
+// =====================================================
+
+function clearSheet() {
+  if (!confirm('Limpar TODOS os campos? Esta ação não pode ser desfeita.')) return;
+  document.querySelectorAll('input[type="text"], input[type="number"], textarea').forEach(el => {
+    if (el.id === 'level') el.value = 1;
+    else if (el.id === 'ascension') el.value = 0;
+    else if (el.id.startsWith('att-')) el.value = 1;
+    else if (el.id === 'san-atual' || el.id === 'san-max' || el.id === 'fome-atual' || el.id === 'fome-max') el.value = 100;
+    else if (el.type === 'number') el.value = 0;
+    else el.value = '';
+  });
+  document.querySelectorAll('input[type="checkbox"]').forEach(el => {
+    el.checked = false;
+    if (el.closest('.skill-row')) el.closest('.skill-row').classList.remove('trained');
+  });
+  document.querySelectorAll('select').forEach(s => s.value = '');
+  onRaceChange(); onClassChange();
+  recalcAll();
+}
+
+// =====================================================
+// INIT
+// =====================================================
+
+window.addEventListener('DOMContentLoaded', () => {
+  populateRaces();
+  populateClasses();
+  buildAttributes();
+  buildSkills();
+  recalcAll();
+});
+</script>
+
+</body>
+</html>
